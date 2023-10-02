@@ -14,3 +14,7 @@ const userSchema = mongoose.Schema({
         required:[true ,'Password is requored']
     }
 })
+
+const userModel = mongoose.model("users" , usesrSchema)
+
+module.exports = userModel
