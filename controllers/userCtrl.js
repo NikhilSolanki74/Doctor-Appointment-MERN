@@ -27,7 +27,7 @@ try {
      if(!user){
         return res.status(200).send({
           success:false,
-            message:"id bnake aao yha per login kerne"
+            message:"id Banalo Pehle"
         })
     }
   
