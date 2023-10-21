@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs')
-const userModel = require('../models/User')
-const doctorModel = require('../models/Doctor')
+const userModel = require('../models/userModel')
+const doctorModel = require('../models/doctorModel')
 const jwt = require('jsonwebtoken')
 const registerController = async (req,res)=>{
     try { 
