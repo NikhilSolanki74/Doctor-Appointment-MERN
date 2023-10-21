@@ -1,5 +1,5 @@
 const express = require('express');
-const { loginController, registerController, authController,applyDoctorController,getAllNotificationController} = require('../controllers/userCtrl');
+const { loginController, registerController, authController,applyDoctorController,getAllNotificationController,deleteAllNotificationController} = require('../controllers/userCtrl');
 const auth = require('../middlewares/auth');
 const router = express.Router();
 
@@ -14,4 +14,6 @@ router.post('/getUserData' , auth ,authController)
 router.post('/apply-doctor' , auth ,applyDoctorController)
 
 router.post('/get-all-notification' , auth ,getAllNotificationController)
+
+router.post('/delete-all-notification' , auth ,deleteAllNotificationController)
 module.exports = router
