@@ -9,6 +9,7 @@ const {
   getAllDoctorsController,
   bookAppointmentController,
   bookingAvailabilityController,
+  userAppointmentsController,
 } = require("../controllers/userCtrl");
 const auth = require("../middlewares/auth");
 const router = express.Router();
@@ -29,5 +30,8 @@ router.get("/getAllDoctors", auth, getAllDoctorsController);
 router.post("/book-appointment", auth, bookAppointmentController);
 
 router.post("/booking-availability", auth, bookingAvailabilityController);
+
+router.get("/user-appointments" , auth  , userAppointmentsController)
+
 
 module.exports = router;
