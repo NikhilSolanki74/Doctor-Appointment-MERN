@@ -1,5 +1,5 @@
 const express = require("express");
-const {getDoctorInfoController, updateProfileController,getDoctorByIdController, doctorAppointmentsController} = require("../controllers/doctorCtrl");
+const {getDoctorInfoController, updateProfileController,getDoctorByIdController, doctorAppointmentsController, updateStatusController} = require("../controllers/doctorCtrl");
 const auth = require("../middlewares/auth");
 const router = express.Router();
 
@@ -12,5 +12,6 @@ router.post("/getDoctorById" , auth , getDoctorByIdController);
 
 router.get('/doctor-appointments',  auth ,doctorAppointmentsController )
 
+router.post('/update-status' , auth , updateStatusController)
 
 module.exports = router;
