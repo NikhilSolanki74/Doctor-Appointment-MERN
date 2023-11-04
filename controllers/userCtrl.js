@@ -200,7 +200,7 @@ const bookAppointmentController = async (req, res) => {
     user.notification.push({
       type: "New-appointment-request",
       message: `A New Appointment Request from bro ${req.body.userInfo.name}`,
-      onClickPath: "/user/appointments",
+      onClickPath: "/user-appointments",
     });
     await user.save();
     res.status(200).send({
