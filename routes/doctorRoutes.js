@@ -1,5 +1,5 @@
 const express = require("express");
-const {getDoctorInfoController, updateProfileController} = require("../controllers/doctorCtrl");
+const {getDoctorInfoController, updateProfileController,getDoctorByIdController} = require("../controllers/doctorCtrl");
 const auth = require("../middlewares/auth");
 const router = express.Router();
 
@@ -7,6 +7,8 @@ const router = express.Router();
 router.post("/getDoctorInfo", auth, getDoctorInfoController);
 
 router.post("/updateProfile" , auth ,  updateProfileController);
+
+router.post("/getDoctorById" , auth , getDoctorByIdController);
 
 
 module.exports = router;
