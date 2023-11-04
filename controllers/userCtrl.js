@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs')
 const userModel = require('../models/userModel')
 const doctorModel = require('../models/doctorModel')
 const jwt = require('jsonwebtoken')
+const appointmentModel = require('../models/appointmentModel')
 const registerController = async (req,res)=>{
     try { 
       const existingUser=await userModel.findOne({email:req.body.email});
@@ -103,14 +104,14 @@ const applyDoctorController = async (req, res) => {
     await userModel.findByIdAndUpdate(adminUser._id, { notification });
     res.status(201).send({
       success: true,
-      message: "Doctor Account Applied SUccessfully",
+      message: "Doctor Account Applied Successfully",
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
       error,
-      message: "Error WHile Applying For Doctotr",
+      message: "Error While Applying For Doctor",
     });
   }
 };
@@ -181,5 +182,31 @@ const getAllDoctorsController = async (req, res) => {
   }
 };
 
+const bookAppointmentController = async (req, res) => {
+  try {
+    req.body.status = "pending";
+    const newAppointment = new appointmentModel(req.body);
+    await newAppointment.save();
+    const user = await userModel.findOne({ _id: req.body.doctorInfo.userId });
+    user.notification.push({
+      type: "New-appointment-request",
+      message: `A New Appointment Request from bro ${req.body.userInfo.name}`,
+      onClickPath: "/user/appointments",
+    });
+    await user.save();
+    res.status(200).send({
+      success: true,
+      message: "Appointment Book succesfully",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: "Error While Booking Appointment",
+    });
+  }
+};
 
-module.exports = { loginController, registerController , authController,applyDoctorController , getAllNotificationController ,deleteAllNotificationController ,getAllDoctorsController };
+
+module.exports = {loginController, registerController , authController, applyDoctorController , getAllNotificationController ,deleteAllNotificationController ,getAllDoctorsController,bookAppointmentController  };
